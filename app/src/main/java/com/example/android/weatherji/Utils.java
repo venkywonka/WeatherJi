@@ -49,7 +49,8 @@ public class Utils {
                 return null;
             }
         } catch (IOException e) {
-            Log.e("Query.Utils", "Problem retrieving the earthquake JSON results.", e);
+            Log.e("Query.Utils", "Problem retrieving the earthquake JSON results.", e); 
+            return null;
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -72,6 +73,7 @@ public class Utils {
             url = new URL(str_url);
         } catch (MalformedURLException e) {
             Log.e("createUrl()", "Error with creating URL ", e);
+            return null;
         }
         return url;
     }
@@ -89,6 +91,7 @@ public class Utils {
             }}catch (IOException e){
                 e.printStackTrace();
                 Log.e("readFromStream()","error reading input stream",e);
+                return null;
             }
         }
         return output.toString();

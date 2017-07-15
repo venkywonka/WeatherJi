@@ -1,0 +1,94 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#FFFFFF"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+
+    >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
+            android:id="@+id/loading"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="chennai"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="16dp"
+            android:textSize="25dp"
+            android:id="@+id/city_name"
+               />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:text = "22 jan 2017"
+            android:id="@+id/date"
+            android:layout_below="@id/city_name"
+            android:textSize="16dp"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/date"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/weather_icon"
+            android:padding="16dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            tools:text="sunny af"
+            android:padding="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/weather_icon"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="16dp"
+           tools:text="pressure :  1015 bar"
+           android:layout_below="@id/description"
+           android:id="@+id/pressure"
+           android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:text="temperature :  215 K"
+            android:layout_below="@id/pressure"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/temperature"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:text="humidity :  idk"
+            android:layout_below="@id/temperature"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/humidity"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/humidity"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="5 day forecast"
+            android:onClick="fiveDayForecast"/>
+
+
+
+</RelativeLayout></ScrollView>

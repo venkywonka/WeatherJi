@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CurrentWeatherActivity.cityName=null;
         sharedPreferences = this.getSharedPreferences("com.example.android.weatherji",MODE_PRIVATE);
         ed = (EditText) findViewById(R.id.city);
         ed.setText(sharedPreferences.getString("city",""));

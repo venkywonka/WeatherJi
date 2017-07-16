@@ -29,7 +29,7 @@ import java.util.Date;
 
 public class CurrentWeatherActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
     WeatherReport weatherReport;
-    String cityName;
+    static String cityName;
     String str_url;
 
 
@@ -39,6 +39,7 @@ public class CurrentWeatherActivity extends AppCompatActivity implements LoaderM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_weather);
         Intent intent = getIntent();
+        if(cityName==null)
         cityName = intent.getStringExtra("blah");
         str_url = "http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=3a179ea1f48f81fda35d9456e13129b7";
         Log.i("CurrentWeatherActivity","the created url: "+str_url);

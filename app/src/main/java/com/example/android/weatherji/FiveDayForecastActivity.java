@@ -26,6 +26,7 @@ public class FiveDayForecastActivity extends AppCompatActivity implements androi
         setContentView(R.layout.activity_five_day_forecast);
         Intent intent = getIntent();
         cityName = intent.getStringExtra("bleh");
+        CurrentWeatherActivity.cityName = cityName;
         str_url5 = "http://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid=3a179ea1f48f81fda35d9456e13129b7";
         Log.i("FiveDayForecastActivity","the created url: "+str_url5);
         Log.i("OnCreate() method","the getLoaderManager().initLoader(0,null,this) is gonna be executed bitch!");

@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -144,12 +146,26 @@ private void parse(String json_response){
         // Start the new activity
         startActivity(returnIntent);
     }
-    void fiveDayForecast(View v){
-        Intent i = new Intent(CurrentWeatherActivity.this,FiveDayForecastActivity.class);
-        i.putExtra("bleh",cityName);
-        startActivity(i);
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.forecast, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.forecast) {
+            Intent i = new Intent(CurrentWeatherActivity.this,FiveDayForecastActivity.class);
+            i.putExtra("bleh",cityName);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
+}
 
 
 

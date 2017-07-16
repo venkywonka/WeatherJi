@@ -80,14 +80,7 @@
             android:layout_below="@id/temperature"
             android:layout_centerHorizontal="true"
             android:id="@+id/humidity"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/humidity"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="5 day forecast"
-            android:onClick="fiveDayForecast"/>
+
 
 
 

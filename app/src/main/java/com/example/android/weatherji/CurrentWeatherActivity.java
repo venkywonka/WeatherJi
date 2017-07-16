@@ -46,7 +46,7 @@ public class CurrentWeatherActivity extends AppCompatActivity implements LoaderM
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if(isConnected==false){
-            Toast.makeText(this,"check internet connection",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"check internet connection",Toast.LENGTH_SHORT).show();
             returnIntent();
         }
         else{

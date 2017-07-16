@@ -30,7 +30,7 @@ public class FiveDayForecastActivity extends AppCompatActivity implements androi
         Log.i("FiveDayForecastActivity","the created url: "+str_url5);
         Log.i("OnCreate() method","the getLoaderManager().initLoader(0,null,this) is gonna be executed bitch!");
         weatherReportList = new ArrayList<>();
-        getLoaderManager().initLoader(0,null,this);
+        getLoaderManager().initLoader(1,null,this);
     }
 
     @Override
@@ -58,6 +58,7 @@ public class FiveDayForecastActivity extends AppCompatActivity implements androi
     public void onLoaderReset(Loader<String> loader) {
         Log.i("onLoaderReset() method","the loader is reset ");
         weatherAdapter.clear();
+        weatherReportList.clear();
 
 
     }
@@ -67,6 +68,7 @@ public class FiveDayForecastActivity extends AppCompatActivity implements androi
         try {
             JSONObject baseJsonResponse = new JSONObject(json_response);
             JSONArray baseArray = baseJsonResponse.getJSONArray("list");
+            weatherReportList.clear();
             for(int i=0;i<baseArray.length();i+=8){
                 JSONObject weatherObject = baseArray.getJSONObject(i);
                 Long timeStamp = weatherObject.getLong("dt");

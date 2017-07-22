@@ -4,6 +4,8 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ public class CurrentWeatherActivity extends AppCompatActivity implements LoaderM
     WeatherReport weatherReport;
     static String cityName;
     String str_url;
+    SQLiteDatabase weatherDB;
+    public static int flag;
 
 
 
@@ -106,6 +110,7 @@ private void parse(String json_response){
             Double pressure = main.getDouble("pressure");
             Double humidity = main.getDouble("humidity");
             weatherReport = new WeatherReport(cityName,description,icon,timeStamp,temp,pressure,humidity);
+
             setUI();
 
 
@@ -118,27 +123,53 @@ private void parse(String json_response){
 
 
 
-        public void setUI(){
-            Log.i("setUI","The setUI() for displaying current weather data is called");
-            ProgressBar loading = (ProgressBar)findViewById(R.id.loading) ;
-            loading.setVisibility(View.INVISIBLE);
-            TextView t = (TextView) findViewById(R.id.city_name);
-            t.setText(weatherReport.getName());
-            ImageView i =(ImageView)findViewById(R.id.weather_icon);
-            Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherReport.getIcon()+".png").into(i);
-            Log.i("setUI,current","the timestamp: "+weatherReport.getTimeStamp().toString());
-            t=(TextView)findViewById(R.id.date);
-            t.setText(new SimpleDateFormat("dd MMM, yyyy").format(new Date(weatherReport.getTimeStamp() * 1000L)));
-            t = (TextView)findViewById(R.id.temperature);
-            Double temp = weatherReport.getTemperature() - 273.16;
-            DecimalFormat format = new DecimalFormat("0.0");
-            t.setText("temperature  :  "+format.format(temp)+" degrees");
-            t = (TextView)findViewById(R.id.pressure);
-            t.setText("pressure  :  "+weatherReport.getPressure()+" hPa");
-            t = (TextView)findViewById(R.id.humidity);
-            t.setText("humidity  :  "+weatherReport.getHumidity()+" %");
-            t=(TextView)findViewById(R.id.description);
-            t.setText("\""+weatherReport.getDescription()+"\"");}
+
+
+    public void setUI(){
+        Log.i("setUI","The setUI() for displaying current weather data is called");
+        ProgressBar loading = (ProgressBar)findViewById(R.id.loading) ;
+        loading.setVisibility(View.INVISIBLE);
+        TextView t = (TextView) findViewById(R.id.city_name);
+        t.setText(weatherReport.getName());
+        ImageView i =(ImageView)findViewById(R.id.weather_icon);
+        Picasso.with(this).load("http://openweathermap.org/img/w/"+weatherReport.getIcon()+".png").into(i);
+        Log.i("setUI,current","the timestamp: "+weatherReport.getTimeStamp().toString());
+        t=(TextView)findViewById(R.id.date);
+        t.setText(new SimpleDateFormat("dd MMM, yyyy").format(new Date(weatherReport.getTimeStamp() * 1000L)));
+        t = (TextView)findViewById(R.id.temperature);
+        Double temp = weatherReport.getTemperature() - 273.16;
+        DecimalFormat format = new DecimalFormat("0.0");
+        t.setText("temperature  :  "+format.format(temp)+" degrees");
+        t = (TextView)findViewById(R.id.pressure);
+        t.setText("pressure  :  "+weatherReport.getPressure()+" hPa");
+        t = (TextView)findViewById(R.id.humidity);
+        t.setText("humidity  :  "+weatherReport.getHumidity()+" %");
+        t=(TextView)findViewById(R.id.description);
+        t.setText("\""+weatherReport.getDescription()+"\"");
+
+        if(flag==0){
+        ++flag;
+
+        weatherDB = this.openOrCreateDatabase("history",MODE_PRIVATE,null);
+
+        weatherDB.execSQL("CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY, cityName VARCHAR, date VARCHAR, description VARCHAR, temperature VARCHAR, humidity VARCHAR, pressure VARCHAR )");
+
+        String sql = "INSERT INTO history (cityName, date, description, temperature, humidity, pressure) VALUES (?, ?, ?, ?, ?, ?)";
+
+        SQLiteStatement statement = weatherDB.compileStatement(sql);
+
+        statement.bindString(1,weatherReport.getName());
+        statement.bindString(2,"\""+weatherReport.getDescription()+"\"");
+        statement.bindString(3,new SimpleDateFormat("dd MMM, yyyy").format(new Date(weatherReport.getTimeStamp() * 1000L)));
+        statement.bindString(4,"temperature  :  "+format.format(temp)+" degrees");
+        statement.bindString(5,"humidity  :  "+weatherReport.getHumidity()+" %");
+        statement.bindString(6,"pressure  :  "+weatherReport.getPressure()+" hPa");
+
+        statement.execute();
+        Log.i("execute: ","the input info ");}
+
+
+    }
 
 
     private void returnIntent(){
@@ -166,6 +197,8 @@ private void parse(String json_response){
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 
 

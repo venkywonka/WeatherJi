@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:src="@mipmap/cloudy"/>
+        android:src="@mipmap/cloudy"
+        android:id="@+id/imageView2"
+        android:layout_above="@+id/city"
+        android:layout_centerHorizontal="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="Go"
-        android:onClick="openCurrentWeatherReport"/>
+        android:onClick="openCurrentWeatherReport"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter the city"
         android:id="@+id/city"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_above="@id/button"
         android:layout_margin="16dp"
-        />
+        android:hint="Enter the city" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:text="OR"
+        android:textSize="25dp"/>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="51dp"
+        android:onClick="mapsIntent"
+        app:srcCompat="@drawable/map" />
+
 
 </RelativeLayout>
